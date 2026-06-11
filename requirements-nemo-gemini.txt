@@ -1,0 +1,4 @@
+nemoguardrails==0.22.0
+langchain==1.3.7
+langchain-community==0.4.2
+langchain-google-genai==4.2.5

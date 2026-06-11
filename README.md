@@ -59,8 +59,10 @@ jupyter notebook notebooks/lab11_guardrails_hitl.ipynb
 ### Local (Python modules — no Colab needed)
 
 ```bash
+python3.12 -m venv .venv312
+source .venv312/bin/activate
 cd src/
-pip install -r ../requirements.txt
+pip install google-genai google-adk
 export GOOGLE_API_KEY="your-api-key-here"
 
 # Run the full lab
@@ -78,6 +80,36 @@ python guardrails/output_guardrails.py
 python testing/testing.py
 python hitl/hitl.py
 ```
+
+Note:
+- `python main.py --part 4` does not require `GOOGLE_API_KEY`.
+- In this workspace, `google-genai` and `google-adk` were verified with Python `3.12`.
+- `nemoguardrails` may still require extra dependency pinning depending on your local Python and platform. If it is unavailable, Part 2C is skipped gracefully by `main.py`.
+
+### Local (NeMo + Gemini isolated environment)
+
+If you want Part 2C with Gemini-backed NeMo Guardrails, use a separate virtual environment:
+
+```bash
+python3.12 -m venv .venv_nemo022
+source .venv_nemo022/bin/activate
+pip install -r requirements-nemo-gemini.txt
+export GOOGLE_API_KEY="your-api-key-here"
+export NEMOGUARDRAILS_LLM_FRAMEWORK="langchain"
+```
+
+Then run NeMo-related code from the notebook or test the local module:
+
+```bash
+cd src/
+../.venv_nemo022/bin/python guardrails/nemo_guardrails.py
+```
+
+This repo was tested with the following Gemini-capable NeMo stack:
+- `nemoguardrails==0.22.0`
+- `langchain==1.3.7`
+- `langchain-community==0.4.2`
+- `langchain-google-genai==4.2.5`
 
 ### Tools Used
 
@@ -128,4 +160,3 @@ python hitl/hitl.py
 - [AI Safety Fundamentals](https://aisafetyfundamentals.com/)
 - [AI Red Teaming Guide](https://github.com/requie/AI-Red-Teaming-Guide)
 - [antoan.ai - AI Safety Vietnam](https://antoan.ai)
-
